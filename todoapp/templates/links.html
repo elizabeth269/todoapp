@@ -6,9 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <h1><a href="/">Todo App</a></h1>
-    {% include 'links.html' %}
-    <div>Tasks <a href="{% url 'add-task' %}">+ Add Task</a></div>
-    {% block content %} {% endblock %}
+    <div>
+      <a href="{% url 'today' %}">Today</a>
+      <a href="{% url 'pending' %}">Pending</a>
+      <a href="{% url 'overdue' %}">Overdue</a>
+    </div>
   </body>
 </html>
