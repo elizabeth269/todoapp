@@ -7,16 +7,13 @@
     <title>Document</title>
   </head>
   <body>
-    <form method="POST" action="">
-      {% csrf_token %}
-      <div>
-        <p>Are you sure you want to delete "{{obj}}"?</p>
-      </div>
-
-      <div>
-        <input type="submit" value="Confirm" />
-      </div>
-    </form>
+    <div>
+      <form action="" method="POST">
+        {% csrf_token%}
+        <p>{{form}}</p>
+        <button type="submit">Save changes</button>
+      </form>
+    </div>
   </body>
 </html>
-{% endblock content %}
+{% endblock %}

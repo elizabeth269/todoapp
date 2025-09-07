@@ -11,8 +11,10 @@
     <ul>
       {% for task in tasks %}
       <li>
-        {{ task.title }} - {{ task.priority }} <a href="">Edit</a>
-        <a href="">Delete</a>
+        {{ task.title }} - {{ task.priority }}
+        <span>{{task.deadline}}</span>
+        <a href="{% url 'edit-task' task.pk %}">Edit</a>
+        <a href="{% url 'delete-task' task.pk %}">Delete</a>
       </li>
       {% endfor %}
     </ul>

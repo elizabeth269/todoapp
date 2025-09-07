@@ -10,5 +10,7 @@
     {% include 'links.html' %}
     <div>Tasks <a href="{% url 'add-task' %}">+ Add Task</a></div>
     {% block content %} {% endblock %}
+    <h2>Completed tasks</h2>
+    {% include 'todo/completed.html' %}
   </body>
 </html>

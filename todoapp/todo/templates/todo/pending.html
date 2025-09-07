@@ -8,6 +8,15 @@
   </head>
   <body>
     <p>This are the pending Todos</p>
+    <ul>
+      {% for task in tasks %}
+      <li>
+        {{ task.title }} - {{ task.priority }} {{task.deadline}}
+        <a href="{% url 'edit-task' task.pk %}">Edit</a>
+        <a href="{% url 'delete-task' task.pk %}">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
   </body>
 </html>
 {% endblock %}
