@@ -9,6 +9,12 @@
     <h1><a href="/">Todo App</a></h1>
     {% include 'links.html' %}
     <div>Tasks <a href="{% url 'add-task' %}">+ Add Task</a></div>
-    {% block content %} {% endblock %}
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% block content %} {% endblock %}
   </body>
 </html>

@@ -1,11 +1,18 @@
-<ul>
-  {% for task in tasks %}
-  <li>
-    {{ task.title }} - {{task.deadline}}
-    <a href="{% url 'edit-task' task.pk %}">Edit</a>
-    <a href="{% url 'delete-task' task.pk %}">Delete</a>
-  </li>
-  {% empty %}
-  <p>No tasks yet.</p>
-  {% endfor %}
+
 </ul>
+{% for task in tasks %}
+<form method="POST" action="{% url 'toggle_task' task.pk %}">
+  {% csrf_token %}
+  <input
+    type="checkbox"
+    name="completed"
+    onchange="this.form.submit()"
+    checked
+  />
+  {{ task.title }} - {{ task.priority }} - {{ task.deadline }}
+  <a href="{% url 'edit-task' task.pk %}">Edit</a>
+  <a href="{% url 'delete-task' task.pk %}">Delete</a>
+</form>
+{% empty %}
+<p>No completed tasks yet.</p>
+{% endfor %}
