@@ -7,17 +7,31 @@
     <title>Document</title>
   </head>
   <body>
-    <h2>All Tasks</h2>
-    <ul>
-      {% for task in tasks %}
-      <li>
-        {{ task.title }} - {{ task.priority }}
-        <span>{{task.deadline}}</span>
-        <a href="{% url 'edit-task' task.pk %}">Edit</a>
-        <a href="{% url 'delete-task' task.pk %}">Delete</a>
-      </li>
-      {% endfor %}
-    </ul>
+    <h2>All tasks</h2>
+
+    {% for task in tasks %}
+    <form method="post" action="{% url 'toggle_task' task.pk %}">
+      {% csrf_token %}
+      <input
+        type="checkbox"
+        onchange="this.form.submit()"
+        {%
+        if
+        task.completed
+        %}checked{%
+        endif
+        %}
+      />
+      {{ task.title }} - {{ task.priority }} - {{ task.deadline }}
+      <a href="{% url 'edit-task' task.pk %}">Edit</a>
+      <a href="{% url 'delete-task' task.pk %}">Delete</a>
+    </form>
+    {% empty %}
+    <p>No tasks yet.</p>
+    {% endfor %}
+    <h2>Completed Tasks</h2>
+
+    {% include 'todo/completed_list.html' with tasks=completed_tasks %}
   </body>
 </html>
 {% endblock %}

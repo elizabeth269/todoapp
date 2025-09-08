@@ -8,15 +8,28 @@
   </head>
   <body>
     <p>These are the overdued todos</p>
-    <ul>
-      {% for task in tasks %}
-      <li>
-        {{ task.title }} - {{ task.priority }} {{task.deadline}}
-        <a href="{% url 'edit-task' task.pk %}">Edit</a>
-        <a href="{% url 'delete-task' task.pk %}">Delete</a>
-      </li>
-      {% endfor %}
-    </ul>
+    {% for task in tasks %}
+    <form method="post" action="{% url 'toggle_task' task.pk %}">
+      {% csrf_token %}
+      <input
+        type="checkbox"
+        onchange="this.form.submit()"
+        {%
+        if
+        task.completed
+        %}checked{%
+        endif
+        %}
+      />
+      {{ task.title }} - {{ task.priority }} - {{ task.deadline }}
+      <a href="{% url 'edit-task' task.pk %}">Edit</a>
+      <a href="{% url 'delete-task' task.pk %}">Delete</a>
+    </form>
+    {% empty %}
+    <p>No tasks yet.</p>
+    {% endfor %}
+    <h2>Completed Tasks</h2>
+    {% include 'todo/completed_list.html' with tasks=completed_tasks %}
   </body>
 </html>
 {% endblock %}

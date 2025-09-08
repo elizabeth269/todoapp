@@ -1,0 +1,11 @@
+<ul>
+  {% for task in tasks %}
+  <li>
+    {{ task.title }} - {{task.deadline}}
+    <a href="{% url 'edit-task' task.pk %}">Edit</a>
+    <a href="{% url 'delete-task' task.pk %}">Delete</a>
+  </li>
+  {% empty %}
+  <p>No tasks yet.</p>
+  {% endfor %}
+</ul>

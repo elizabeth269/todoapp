@@ -20,6 +20,7 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['-updated_at', '-created_at']
+        
     def __str__(self):
         status = "✅" if self.completed else "❌"
         return f"{status} {self.title} ({self.priority})"
